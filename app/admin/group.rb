@@ -1,5 +1,5 @@
 ActiveAdmin.register Group do
-  permit_params :name, :enabled, :capacity
+  permit_params :name, :enabled, :capacity, :level_id
   menu label: "Grupy"
   menu priority: 4
 # See permitted parameters documentation:

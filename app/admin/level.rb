@@ -1,5 +1,5 @@
 ActiveAdmin.register Level do
-  permit_params :name, :enabled
+  permit_params :name, :enabled, :language_id
   menu label: "Poziomy"
   menu priority: 3
 # See permitted parameters documentation:
