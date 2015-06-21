@@ -15,5 +15,13 @@ ActiveAdmin.register Group do
 #   permitted
 # end
 
+  before_create do |group|
+    level = Level.find(params[:group][:level_id])
+    
+    group.name = "#{level.name}, grupa #{params[:group][:name]}"
+  end
 
+  after_create do
+    flash[:success] = "Utworzono nową grupę"
+  end
 end

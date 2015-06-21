@@ -14,6 +14,13 @@ ActiveAdmin.register Level do
 #   permitted << :other if resource.something?
 #   permitted
 # end
+  
+  before_create do |level|
+    language = Language.find(params[:level][:language_id])
+    level.name = "#{language.name} #{params[:level][:name]}"
+  end
 
-
+  after_create do
+    flash[:success] = "Utworzono nowy poziom"
+  end
 end

@@ -14,6 +14,8 @@ ActiveAdmin.register Language do
 #   permitted << :other if resource.something?
 #   permitted
 # end
-
+  after_create do
+    flash[:success] = "Utworzono nowy język"
+  end
 
 end
