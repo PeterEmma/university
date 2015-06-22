@@ -4,19 +4,18 @@ ActiveAdmin.register Level do
   menu label: "Poziomy", priority: 3
 
   filter :language_id, label: "Język", as: :select, collection: ->{ Language.all }
-  filter :enabled, label: "Aktywny?"
+  filter :enabled, label: "Aktywne?", collection: [["Tak", "true"], ["Nie", "false"]]
   
   index do
     selectable_column
-    column "Język" do |level|
+    column "Język", sortable: :level do |level|
       link_to Language.find(level.language_id).name, admin_language_path(level.language_id)
     end
     column "Poziom", :name
-    column "Aktywny?", :enabled
+    column "Aktywne?", :enabled
     column "Zapisani kursanci (zapłacili)" do |level|
       h3 "#{level.students.count} (#{level.students_who_paid.count})"
     end
-    
     column "Zapłacono" do |level|
       h3 "#{level.amount_paid} / #{level.amount_to_pay}"
     end
@@ -27,24 +26,28 @@ ActiveAdmin.register Level do
     h1 
     h1 "#{level.language.name} #{level.name}"
     if level.enabled
-      h3 "Aktywny"
+      h3 "Aktywne"
     else
-      h3 "Nieaktywny"
+      h3 "Nieaktywne"
     end
     
     hr
-    
     h2 "Grupy"
-    
-    
     level.groups.each do |group|
       h2 link_to "#{level.language.name} #{level.name}, grupa #{group.name}", admin_group_path(group)
-      
     end
-    
-    
   end
 
+  form do |f|
+    f.inputs "Poziom" do
+      f.input :language, label: "Język"
+      f.input :name, label: "Poziom", as: :select, collection: ["A1", "A2", "B1", "B2", "C1", "C2"]
+      f.input :enabled, label: "Aktywne?"
+    end
+    f.actions
+  end
+  
+  
   after_create do
     flash[:success] = "Utworzono nowy poziom"
   end

@@ -5,7 +5,9 @@ class Group < ActiveRecord::Base
   validates :name, :capacity, :level_id, presence: true
   
   def level
-    level = Level.find(self.level_id)
+    if level_id
+      level = Level.find(self.level_id)
+    end
   end
   
   def lectures

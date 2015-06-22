@@ -2,7 +2,9 @@ class Lecture < ActiveRecord::Base
   belongs_to :group
   
   def group
-    group = Group.find(self.group_id)
+    if group_id
+      group = Group.find(self.group_id)
+    end
   end
   
   def pretty_hour

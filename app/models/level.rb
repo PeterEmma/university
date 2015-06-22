@@ -3,10 +3,12 @@ class Level < ActiveRecord::Base
   has_many :groups, dependent: :destroy
   
   validates :name, :language_id, presence: true
-  validates :name, uniqueness: true
-
+  validates_uniqueness_of :name, scope: :language_id
+  
   def language
-    language = Language.find(self.language_id)
+    if language_id
+      language = Language.find(self.language_id)
+    end
   end
   
   def groups
