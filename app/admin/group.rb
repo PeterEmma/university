@@ -53,10 +53,10 @@ ActiveAdmin.register Group do
   # edit and new form
   form do |f|
     f.inputs "Grupa językowa" do
+      f.input :level, label: "Poziom", member_label: Proc.new { |level| "#{level.language.name} #{level.name}" }
       f.input :name, label: "Nazwa"
       f.input :enabled, label: "Aktywne?"
       f.input :capacity, label: "Ilość miejsc"
-      f.input :level, label: "Poziom", member_label: Proc.new { |level| "#{level.language.name} #{level.name}" }
     end
     f.actions
   end
