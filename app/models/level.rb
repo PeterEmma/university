@@ -5,6 +5,10 @@ class Level < ActiveRecord::Base
   validates :name, :language_id, presence: true
   validates :name, uniqueness: true
 
-
-
+  def language
+    language = Language.find(self.language_id)
+  end
+  def groups
+    groups = Group.where(level_id: self.id)
+  end
 end

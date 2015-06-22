@@ -23,8 +23,30 @@ ActiveAdmin.register Group do
     
     column "Aktywna?", :enabled
     column "Ilość miejsc", :capacity
+    column "Zapisani kursanci"
     actions
   end
+  
+  show do
+    h1 "#{group.level.language.name} #{group.level.name}, grupa #{group.name}"
+    if group.enabled
+      h3 "Aktywny"
+    else
+      h3 "Nieaktywny"
+    end
+    
+    hr
+    
+    h2 "Zajęcia"
+    
+    
+    group.lectures.each do |lecture|
+      h2 link_to "#{lecture.weekday}, #{lecture.hour.strftime('%H:%M')}", admin_lecture_path(lecture)
+    end
+    
+  end
+  
+  
   after_create do
     flash[:success] = "Utworzono nową grupę"
   end

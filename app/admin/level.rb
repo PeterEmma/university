@@ -13,6 +13,28 @@ ActiveAdmin.register Level do
     column "Aktywny?", :enabled
     actions
   end
+  
+  show do
+    h1 
+    h1 "#{level.language.name} #{level.name}"
+    if level.enabled
+      h3 "Aktywny"
+    else
+      h3 "Nieaktywny"
+    end
+    
+    hr
+    
+    h2 "Grupy"
+    
+    
+    level.groups.each do |group|
+      h2 link_to "#{level.language.name} #{level.name}, grupa #{group.name}", admin_group_path(group)
+      
+    end
+    
+    
+  end
 
   after_create do
     flash[:success] = "Utworzono nowy poziom"
