@@ -1,0 +1,13 @@
+h1 language.name
+  if language.enabled
+    h3 "Aktywne"
+  else
+    h3 "Nieaktywne"
+  end
+    
+hr
+h2 "Poziomy"
+language.levels.each do |level|
+  h2 link_to "#{language.name} #{level.name}", admin_level_path(level)
+end
+    

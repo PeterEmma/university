@@ -23,19 +23,7 @@ ActiveAdmin.register Level do
   end
   
   show do
-    h1 
-    h1 "#{level.language.name} #{level.name}"
-    if level.enabled
-      h3 "Aktywne"
-    else
-      h3 "Nieaktywne"
-    end
-    
-    hr
-    h2 "Grupy"
-    level.groups.each do |group|
-      h2 link_to "#{level.language.name} #{level.name}, grupa #{group.name}", admin_group_path(group)
-    end
+    render 'show'
   end
 
   form do |f|

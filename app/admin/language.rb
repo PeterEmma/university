@@ -21,18 +21,7 @@ ActiveAdmin.register Language do
   end
   
   show do
-    h1 language.name
-    if language.enabled
-      h3 "Aktywne"
-    else
-      h3 "Nieaktywne"
-    end
-    
-    hr
-    h2 "Poziomy"
-    language.levels.each do |level|
-      h2 link_to "#{language.name} #{level.name}", admin_level_path(level)
-    end
+    render 'show'
   end
   
   # edit and new form
@@ -43,6 +32,8 @@ ActiveAdmin.register Language do
     end
     f.actions
   end
+  
+  
   after_create do
     flash[:success] = "Utworzono nowy język"
   end

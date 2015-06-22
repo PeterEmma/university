@@ -30,24 +30,7 @@ ActiveAdmin.register Group do
   end
   
   show do
-    h1 "#{group.level.language.name} #{group.level.name}, grupa #{group.name}"
-    if group.enabled
-      h3 "Aktywne"
-    else
-      h3 "Nieaktywne"
-    end
-    
-    hr
-    h2 "Zajęcia"
-    group.lectures.each do |lecture|
-      h2 link_to "#{lecture.weekday}, #{lecture.hour.strftime('%H:%M')}", admin_lecture_path(lecture)
-    end
-    
-    hr
-    h2 "Zapisani kursanci (#{group.students.count})"
-    group.students.each do |student|
-      h2 link_to "#{student.firstname} #{student.lastname}, #{student.email}, #{student.phone}", admin_student_path(student)
-    end
+    render 'show'
   end
   
   # edit and new form
