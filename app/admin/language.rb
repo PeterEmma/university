@@ -12,6 +12,13 @@ ActiveAdmin.register Language do
       link_to language.name, admin_language_path(language.id)
     end
     column "Aktywny?", :enabled
+    column "Zapisani kursanci (zapłacili)" do |language|
+      h3 "#{language.students.count} (#{language.students_who_paid.count})"
+    end
+    
+    column "Zapłacono" do |language|
+      h3 "#{language.amount_paid} / #{language.amount_to_pay}"
+    end
     actions
   end
   

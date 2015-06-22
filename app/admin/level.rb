@@ -13,6 +13,13 @@ ActiveAdmin.register Level do
     end
     column "Poziom", :name
     column "Aktywny?", :enabled
+    column "Zapisani kursanci (zapłacili)" do |level|
+      h3 "#{level.students.count} (#{level.students_who_paid.count})"
+    end
+    
+    column "Zapłacono" do |level|
+      h3 "#{level.amount_paid} / #{level.amount_to_pay}"
+    end
     actions
   end
   
