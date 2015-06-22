@@ -16,4 +16,8 @@ class Group < ActiveRecord::Base
     students = Student.where(group_id: self.id)
   end
   
+  def students_who_paid
+    students.where(paid: true)
+  end
+  
 end

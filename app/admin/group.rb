@@ -3,6 +3,10 @@ ActiveAdmin.register Group do
   permit_params :name, :enabled, :capacity, :level_id
   menu label: "Grupy", priority: 4
 
+  filter :level, label: "Poziom"
+  filter :enabled, label: "Aktywna?"
+  filter :capacity, label: "Ilość miejsc"
+  
   index do
     selectable_column
     
@@ -23,8 +27,8 @@ ActiveAdmin.register Group do
     
     column "Aktywna?", :enabled
     column "Ilość miejsc", :capacity
-    column "Zapisani kursanci" do |group|
-      h3 group.students.count
+    column "Zapisani kursanci (zapłacili)" do |group|
+      h3 "#{group.students.count} (#{group.students_who_paid.count})"
     end
     actions
   end

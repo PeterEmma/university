@@ -2,6 +2,9 @@ ActiveAdmin.register Language do
   permit_params :name, :enabled
   menu label: "Języki", priority: 2
 
+  filter :name, label: "Język", as: :select, collection: ->{ Language.all }
+  filter :enabled, label: "Aktywny?"
+  
   index do
     selectable_column
     
