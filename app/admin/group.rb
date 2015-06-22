@@ -48,7 +48,7 @@ ActiveAdmin.register Group do
     
     hr
     
-    h2 "Zapisani kursanci"
+    h2 "Zapisani kursanci (#{group.students.count})"
     
     
     group.students.each do |student|
