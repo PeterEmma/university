@@ -1,26 +1,30 @@
 ActiveAdmin.register Group do
+  belongs_to :level, optional: true
   permit_params :name, :enabled, :capacity, :level_id
-  menu label: "Grupy"
-  menu priority: 4
-# See permitted parameters documentation:
-# https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
-#
-# permit_params :list, :of, :attributes, :on, :model
-#
-# or
-#
-# permit_params do
-#   permitted = [:permitted, :attributes]
-#   permitted << :other if resource.something?
-#   permitted
-# end
+  menu label: "Grupy", priority: 4
 
-  before_create do |group|
-    level = Level.find(params[:group][:level_id])
+  index do
+    selectable_column
     
-    group.name = "#{level.name}, grupa #{params[:group][:name]}"
+    column "Język" do |group|
+      level = Level.find(group.level_id)
+      language = Language.find(level.language_id)
+      link_to language.name, admin_language_path(language)
+    end
+    
+    column "Poziom" do |group|
+      level = Level.find(group.level_id)
+      link_to level.name, admin_level_path(level)
+    end
+    
+    column "Grupa" do |group|
+      link_to group.name, admin_group_path(group)
+    end
+    
+    column "Aktywna?", :enabled
+    column "Ilość miejsc", :capacity
+    actions
   end
-
   after_create do
     flash[:success] = "Utworzono nową grupę"
   end

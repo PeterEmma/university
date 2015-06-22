@@ -1,23 +1,17 @@
 ActiveAdmin.register Level do
+  belongs_to :language, optional: true
   permit_params :name, :enabled, :language_id
-  menu label: "Poziomy"
-  menu priority: 3
-# See permitted parameters documentation:
-# https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
-#
-# permit_params :list, :of, :attributes, :on, :model
-#
-# or
-#
-# permit_params do
-#   permitted = [:permitted, :attributes]
-#   permitted << :other if resource.something?
-#   permitted
-# end
+  menu label: "Poziomy", priority: 3
+
   
-  before_create do |level|
-    language = Language.find(params[:level][:language_id])
-    level.name = "#{language.name} #{params[:level][:name]}"
+  index do
+    selectable_column
+    column "Język" do |level|
+      link_to Language.find(level.language_id).name, admin_language_path(level.language_id)
+    end
+    column "Poziom", :name
+    column "Aktywny?", :enabled
+    actions
   end
 
   after_create do

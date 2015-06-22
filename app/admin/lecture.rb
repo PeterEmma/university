@@ -1,7 +1,6 @@
 ActiveAdmin.register Lecture do
   permit_params :description, :enabled, :hour, :weekday, :group_id
-  menu label: "Zajęcia"
-  menu priority: 5
+  menu label: "Zajęcia", priority: 5
 # See permitted parameters documentation:
 # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
 #
