@@ -4,12 +4,14 @@ ActiveAdmin.register Lecture do
   menu label: "Zajęcia", priority: 5
 
   filter :group, label: "Grupa", as: :select, member_label: Proc.new { |group| "#{group.level.language.name} #{group.level.name}, grupa #{group.name}" }
-  filter :enabled, label: "Aktywne?"
+  filter :enabled, label: "Aktywne?", collection: [["Tak", "true"], ["Nie", "false"]]
   filter :weekday, label: "Dzień tygodnia", as: :select, collection: ["poniedziałek", "wtorek", "środa", "czwartek", "piątek", "sobota", "niedziela"]
   
   index do
     selectable_column
-    
+    column "Grupa" do |lecture|
+      h3 "#{lecture.group.level.language.name} #{lecture.group.level.name}, grupa #{lecture.group.name}"
+    end
     column "Opis", :description
     column "Aktywne?", :enabled
     column "Godzina" do |lecture|

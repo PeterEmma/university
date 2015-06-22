@@ -1,6 +1,7 @@
 class Group < ActiveRecord::Base
   belongs_to :level
   has_many :lectures, dependent: :destroy
+  has_many :students
   
   validates :name, :capacity, :level_id, presence: true
   
