@@ -12,4 +12,8 @@ class Group < ActiveRecord::Base
     lectures = Lecture.where(group_id: self.id)
   end
   
+  def students
+    students = Student.where(group_id: self.id)
+  end
+  
 end
